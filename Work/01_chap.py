@@ -328,3 +328,44 @@ with open( tp+r"\Work\Data\foo.txt",'rt') as f, open(tp+r'\work\data\bar.txt', '
         print(line)
 
 
+'''######### 1.7 Functions ##########
+Use functions for code you want to reuse. Here is a function definition:
+
+'''
+# sum count of n numbers
+def sumcount(n):
+    total =0
+    while n>0:
+        total +=n
+        n -=1
+    return total
+
+sum = sumcount(10)
+print(sum)
+
+## python specific standard libraries
+import math
+import urllib.request
+
+u = urllib.request.urlopen('https://google.com')
+data = u.read()
+## Errors and Exceptions
+## catching and handling exceptions
+## try -except (line try catch block)
+## raising excpetion using  
+raise RuntimeError('What a bluff')
+
+import os
+xpath = os.getcwd()
+xpath += r'\work\data\foo.txt'
+with open(xpath,'rt') as f:
+    try:
+        for line in f:
+            print(line)
+    except ValueError:
+        print('Error in reading line')
+
+## Exercise 1.29: Defining a function
+## Exercise 1.30: modify pocst.py into a function
+        
+

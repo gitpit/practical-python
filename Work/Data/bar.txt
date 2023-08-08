@@ -1,0 +1,19 @@
+# this is foo.txt file
+
+
+
+Why learning python seems so straightforward. Is this becuase I already know C based languages or is it the way python language is?
+
+I still wonder that till now, things have been quite simple and when I start writing long complex programs I may realize the issues.
+
+What about writing a very large application like simulation? What about integrating with OS based frameworks? What about rich UI design?
+
+What about platform SDK integration? What about code management? 
+
+What about design patterns in python? 
+
+What about working on a single file with other team members?
+
+Is there a proven application like C++, .Net in python which exists?
+
+$$$$ output to console is set to file
