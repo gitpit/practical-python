@@ -121,9 +121,43 @@ def gain_loss(portfolioFile,pricesFile):
     # total loss/gain print
     tot =0
     for a in gain_loss:
-        #tot = tot + float(a[3])
+        tot = tot + float(a[3])
         print(a)
     print(f'Total loss/gain = {tot:0.4f}')    
 
 gain_loss(portFile,priceFile)
 
+## Exercise 2.8: How to format numbers
+##Exercise 2.11: Adding some headers
+## Exercise 2.12: Formatting Challenge
+def make_report(port_list, prices_dict):
+    port_status = []
+    for tu in port_list:    # for each tuple as row
+        strx = str(tu[0].replace("\"",""))
+        if strx in prices_dict.keys():
+            val = prices_dict.get(strx)
+            purchase_price = int(tu[1]* float(tu[2]))
+            market_price = int(tu[1]* float(val))
+            val = market_price - purchase_price
+            tux = (tu[0],tu[1],tu[2], val)   
+            port_status.append(tux)
+            #port_status.append(tuple(tu[0],tu[1],tu[1],val))
+    ## print this in a formatted order
+    hdr = ('Name' ,    'Shares'  ,    'Price',     'Change')
+    hdr = f'{hdr[0]:>10s}{hdr[1]:>10s}{hdr[2]:>10s}{hdr[3]:>10s}'
+    #print(f'Name     Shares      Price     Change')
+    print(hdr)
+    print(f'---------- ---------- ---------- ----------')
+
+    for x in port_status:
+        print('%10s %10d $%0.2f, %10.2f' %(x))
+
+    '''for name,share,price,change in port_status:
+        print(f'{name:10s} {share:10d}, {price:$>.2f}, {change:>10.2f}')
+        '''
+    return port_status
+
+pol = read_portfolio(portFile)
+prd = read_prices(priceFile)
+
+standing = make_report(pol,prd)
