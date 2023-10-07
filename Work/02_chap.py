@@ -322,7 +322,149 @@ total_shares['GE']
 # using defaultdict
 
 
-'''##                             ##'''
+'''##                             
 ##       2.6 List Comprehensions    ##
-'''##                             ##'''
+[ <expression> for <variable_name> in <sequence> if <condition>]
+#A common task is processing items in a list. This section introduces list comprehensions, a powerful tool for doing just that.
+'''##                            
 
+# A list comprehension creates a new list by applying an operation to each element of a sequence
+#Creating new lists
+a = [1,2,3,4,5 , -10,22,12,6]
+b = [2*x for x in a]
+b
+
+nameX = [nm.upper() for nm in names]
+nameX
+
+#Filtering
+xt = [print(x) for x in a if x>0]
+xt
+
+## first run report.py program in bash/powershell mode and then try 
+
+
+## set comprehennsion
+## using { } bracket for this
+xt = { print(s) for s in zholding}
+xt = { print(s) for s in holding}
+xt
+
+
+'''##                             
+##       2.6 Objects    ##
+
+'''##   
+# Assignment
+# assignment operations never make a copy of the value being assigned. 
+# All assignments are merely ****reference copies**** (shallow copy or copy by reference or * assignment) (or pointer copies if you prefer).
+# to check the two assigned values; use "is" or "==" to compare eg: a is b or a == b
+## shallow copy
+a = [2,3,4]
+b =a
+b
+a.append(5)
+a
+b
+b.append(0)
+a
+b
+c = b
+b[1] == a[1]
+# Reassigning values
+# Reassigning a value never overwrites the memory used by the previous value.
+a = [9,9,9,9]
+a
+b
+a is b      # compares not the value by the pointer/reference address
+
+id(a) == id(b)
+id(a)
+id(b)
+id(c)
+
+## deep copy
+# use copy module
+import copy
+a = [2,4,[55,66]]
+b = a
+a
+b
+a == b
+a[2].append(99)
+a
+b
+
+b = copy.deepcopy(a)
+a
+b
+a == b
+a[2].append(100)
+a
+b
+a[2] == b[2]
+
+## Type Checking for an object -- isinstance()
+a = [2,3,4]
+type(a)
+isinstance(a, list)
+'''
+Everything is an object
+Numbers, strings, lists, functions, exceptions, classes, instances, etc. are all objects. 
+It means that all objects that can be named can be passed around as data, placed in containers, etc., 
+without any restrictions. There are no special kinds of objects. Sometimes it is said that all objects are “first-class”.
+'''
+import math
+import os
+items = [abs, math, copy, os, ValueError, 1, "strd", {"age":23}, (32,4)]
+items
+
+'''
+Exercise 2.24: First-class Data
+'''
+import os
+import csv
+workdir = os.getcwd()
+workdir += r'\work'
+types =[str,int,float]
+with open(workdir+r'\data\portfolio.csv') as f:
+    rows = csv.reader(f)
+    hdr = next(rows)    
+    shareValue =0
+    for row in rows:       
+       r = zip(types,row)
+       print(list(r))
+       shareValue += types[1](row[1])*types[2](row[2])
+    print(f'total share value = {shareValue}')
+
+##2 -- more useful to pase data; use types and then use zip. new thing is using "fun" function type
+types =[str,int,float]
+with open(workdir+r'\data\portfolio.csv','rt') as f:
+    rows = csv.reader(f)
+    hdr = next(rows)    
+    shareValue =0
+    shareValue2 =0
+    allData = []
+    dataDict = []
+    for row in rows:       
+        converted = []
+        for fun, val in zip(types,row):     #In the loop, the func variable is one of the type conversion functions       
+           converted.append(fun(val))       # this can also be done wtih - { name: func(val) for name, func, val in zip(headers, types, row) }        
+        shareValue2 += converted[1]*converted[2]
+        d= dict(zip(hdr,converted))
+        dataDict.append(d)
+        allData.append(converted)
+        shareValue += types[1](row[1])*types[2](row[2])
+    print(f'total share value = {shareValue}  {shareValue2}')       
+
+for x in allData:
+    print(x)
+
+##2 - using list comprehension to do similar 
+f = open(workdir+r'\data\dowstocks.csv','rt')
+rows =csv.reader(f)
+hdr = next(rows)
+types = [str, float, str, str, float, float, float, float, int]
+for row in rows:
+    convertedX= [fun(val) for fun,val in zip(types,row)]
+f.close()
