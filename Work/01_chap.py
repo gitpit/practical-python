@@ -262,12 +262,12 @@ ts = ','.join(names)
 ts
 type(ts)
 type(names)
+tp1 = list(ts.split(','))
 ## list of list and 
 tx = ['test1',names,it]
 
 for item in tx:
     print(item)
-    next(tx)
 
 '''######### 1.6 File Management   ##########
 open file should be closed
@@ -307,7 +307,7 @@ f.close()
 g.close()
 
 ##  another way to open and close file without using close() method
-
+## like C++ idiom --
 with open( tp+r"\Work\Data\foo.txt",'rt') as f, open(tp+r'\work\data\bar.txt', 'w+') as g:
     for line in f:
         g.write(line)
@@ -330,7 +330,6 @@ with open( tp+r"\Work\Data\foo.txt",'rt') as f, open(tp+r'\work\data\bar.txt', '
 
 '''######### 1.7 Functions ##########
 Use functions for code you want to reuse. Here is a function definition:
-
 '''
 # sum count of n numbers
 def sumcount(n):

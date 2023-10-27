@@ -1,0 +1,7 @@
+#header for the test file
+    void setString(std::string_view name, const String & value);
+    String getString(std::string_view name) const;
+    bool isChanged(std::string_view name) const;
+    SettingsChanges changes() const;
+    void applyChange(const SettingChange & change);
+# End header for the test file

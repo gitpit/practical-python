@@ -52,5 +52,38 @@ print("-------------\n")
 for r in recs2:
     print(r)
 
+'''
+            3.5 Main Module
+            Python has no main function or method. Instead, there is a main module. The main module is the source file that runs first.
+            __main__ check
+            It is standard practice for modules that run as a main script to use this convention:
 
-## 3.3 Error Checking
+            Main programs vs. library imports
+            Any Python file can either run as main or as a library import:
+            
+            bash % python3 prog.py # Running as main
+
+            import prog   # Running as library import
+
+'''
+
+'''
+ Python Program Template -- order
+'''
+# prog.py
+# Import statements (libraries)
+import modules
+
+# Functions
+def spam():
+    ...
+
+def blah():
+    ...
+
+# Main function
+def main():
+    ...
+
+if __name__ == '__main__':
+    main()

@@ -5,12 +5,12 @@ https://gto76.github.io/python-cheatsheet/#dictionary
 
 
 # Exercise 2.4 A list of tuples
-define a function read_portfolio(filename) that opens a given portfolio file and reads it into a list of tuples.
+define a function read_portfolio(filename) that opens a given portfolio file and reads it 
+into a list of tuples.
 '''
 def read_portfolio(fname):
     dataTup =()
     dataList = []
-    dataDict = {}
     try:        
         with open(fname, 'rt') as f:
             hdr = f.readline()  #ignore hdr
@@ -28,7 +28,6 @@ def read_portfolio(fname):
 def read_portfolio2(fname):
     dataTup =()
     dataList = []
-    dataDict = {}
     try:        
         with open(fname, 'rt') as f:
             hdr = f.readline()  #ignore hdr
@@ -48,8 +47,8 @@ import os
 import csv
 
 workDir = os.getcwd()
-portFile = workDir + r'/work/data/portfolio.csv'
-priceFile =workDir + r'/work/data/prices.csv'
+portFile = workDir + r'\work\data\portfolio.csv'
+priceFile =workDir + r'\work\data\prices.csv'
 mylist1 = read_portfolio(portFile)
 mylist2 = read_portfolio2(portFile)
 print(mylist1)
@@ -161,3 +160,23 @@ pol = read_portfolio(portFile)
 prd = read_prices(priceFile)
 
 standing = make_report(pol,prd)
+
+# using list comprehension ( chap 2.6)
+xsum = sum([t[3] for t in standing])
+xsum
+
+
+nt1 =[]
+hdr = ['Name' ,    'Shares'  ,    'Price',     'Change']
+for tu in standing:
+    nt1.append(list(zip(hdr,tu)))
+nt1
+
+for s in nt1:
+    print(s)
+
+xsum2 = [print(s[1][1]) for s in nt1]
+xsum2
+
+xval2 = {print(s[0]) for s in nt1}
+xval2
