@@ -8,7 +8,11 @@ https://gto76.github.io/python-cheatsheet/#dictionary
 define a function read_portfolio(filename) that opens a given portfolio file and reads it 
 into a list of tuples.
 '''
-def read_portfolio(fname):
+def read_portfolio_2_4(fname):
+    '''
+    # Exercise 2.4 A list of tuples
+    return tuples
+    '''
     dataTup =()
     dataList = []
     try:        
@@ -25,7 +29,11 @@ def read_portfolio(fname):
 
 ## Exercise 2.5: List of Dictionaries
 ## reading portfolio.csv 
-def read_portfolio2(fname):
+def read_portfolio_2_5(fname):
+    '''
+    ## Exercise 2.5: List of Dictionaries
+    return list
+    '''
     dataTup =()
     dataList = []
     try:        
@@ -42,6 +50,42 @@ def read_portfolio2(fname):
         print('fiile not found')
     return dataList
 
+## Exercise 4.4: reading portfolio.csv  and ret stock objects
+import stock
+def read_portfolio_4_4_x(fname):
+    '''
+    ## Exercise 4.4: reading portfolio.csv  and ret stock objects
+    return stock object
+    '''    
+    stockList = []
+    try:        
+        with open(fname, 'rt') as f:
+            hdr = f.readline()  #ignore hdr
+            temp = hdr.split(',')            
+            for line in f:
+                #print (line)
+                dataTup = line.split(',')
+                if len(dataTup) > 2:                                                    
+                    st = stock.Stock(dataTup[0], int(dataTup[1]), float(dataTup[2]))
+                    stockList.append(st)
+    except FileExistsError:
+        print('fiile not found')
+    return stockList
+
+def read_portfolio_4_4(fname):
+    '''
+    ## Exercise 4.4: reading portfolio.csv  and ret stock objects
+    return stock object - using for loop enumerator
+    '''    
+    try:        
+        with open(fname, 'rt') as f:
+            hdr = f.readline()  #ignore hdr
+            sl = [stock.Stock(s.split(',')[0], int(s.split(',')[1]), float(s.split(',')[2])) for s in f]            
+    except FileExistsError:
+        print('fiile not found')
+    return sl
+
+
 ## calling methods above
 import os
 import csv
@@ -49,11 +93,16 @@ import csv
 workDir = os.getcwd()
 portFile = workDir + r'\work\data\portfolio.csv'
 priceFile =workDir + r'\work\data\prices.csv'
-mylist1 = read_portfolio(portFile)
-mylist2 = read_portfolio2(portFile)
+mylist1 = read_portfolio_2_4(portFile)
+mylist2 = read_portfolio_2_5(portFile)
+mystocks = read_portfolio_4_4_x(portFile)
+mystocks = read_portfolio_4_4(portFile)
 print(mylist1)
 print("-------------------------------")
 print(mylist2)
+print("-------------------------------")
+for ms in mystocks:    
+    print(ms.name,ms.shares,ms.price)
 
 ## try ...
 tDict = {}
@@ -69,12 +118,15 @@ for k in mylist2:   # read each dict from the list
 
 print(tDict)
 
-
 ## Exercise 2.6: Dictionaries as a container
 ## Write a function read_prices(filename) that reads a set of prices such as this into a 
 ## dictionary where the keys of the dictionary are the stock names and the values in the dictionary are the stock prices.
 
-def read_prices(fname):
+def read_prices_2_6(fname):
+    '''
+    ## Exercise 2.6: Dictionaries as a container
+    return  dictionary
+    '''
     import csv
     dict1 ={}
     try:
@@ -83,14 +135,14 @@ def read_prices(fname):
             #hdr = next(rows)
             #print(hdr)
             for row in rows:
-                print(row)
+                #print(row)
                 if(len(row) >= 2):
-                    dict1[row[0]] = row[1]
+                    dict1[row[0]] = float(row[1])
     except FileNotFoundError:
         print('File not found -- {}',fname)
     return dict1
 
-dt = read_prices(priceFile)
+dt = read_prices_2_6(priceFile)
 print(dt)
 
 '''
@@ -99,10 +151,13 @@ Tie all of this work together by adding a few additional statements to your repo
 These statements should take the list of stocks in Exercise 2.5 and the dictionary of prices in Exercise 2.6 and compute 
 the current value of the portfolio along with the gain/loss.
 '''
-
 def gain_loss(portfolioFile,pricesFile):
-    pol = read_portfolio(portfolioFile)
-    prd = read_prices(pricesFile)
+    '''
+    ##Exercise 2.7: Finding out if you can retire
+    return list: gain_loss
+    '''
+    pol = read_portfolio_2_4(portfolioFile)
+    prd = read_prices_2_6(pricesFile)
     gain_loss = []
     for tu in pol:      # for each tuple in the list        
         strx = str(tu[0]).replace("\"","")
@@ -124,12 +179,51 @@ def gain_loss(portfolioFile,pricesFile):
         print(a)
     print(f'Total loss/gain = {tot:0.4f}')    
 
+
+
+## Excercise 4.4 gain_loss using stocks class
+def gain_loss_4_4(portfolioFile,pricesFile):
+    '''
+    ##Exercise 2.7: Finding out if you can retire
+    return list: gain_loss
+    '''
+    pol = read_portfolio_4_4(portfolioFile)
+    prd = read_prices_2_6(pricesFile)
+    gain_loss = []
+    for st in pol:
+        strx = str(st.name).replace("\"","")
+        if strx in prd.keys():
+            cur_price = prd.get(strx)
+            pur_cost = st.shares*st.price #  int(tu[1]) * float(tu[2])
+            cur_cost = st.shares* float(cur_price)
+            if pur_cost < cur_cost:
+                status = 'gain'
+            else:        
+                status = 'loss'
+            cost_diff = cur_cost - pur_cost
+            tux = (strx,st.shares,st.price, cur_price,cost_diff, status)            
+            gain_loss.append(tux)
+    # total loss/gain print
+    tot =0
+    for a in gain_loss:
+        tot = tot + float(a[4])
+        print(a)
+    print(f'Total loss/gain = {tot:0.4f}')    
+
+gain_loss_4_4(portFile,priceFile)
+
 gain_loss(portFile,priceFile)
+
 
 ## Exercise 2.8: How to format numbers
 ##Exercise 2.11: Adding some headers
 ## Exercise 2.12: Formatting Challenge
-def make_report(port_list, prices_dict):
+def make_report_2_12(port_list, prices_dict):
+    '''
+    ## Exercise 2.8: How to format numbers
+    ##Exercise 2.11: Adding some headers
+    ## Exercise 2.12: Formatting Challenge
+    '''
     port_status = []
     for tu in port_list:    # for each tuple as row
         strx = str(tu[0].replace("\"",""))
@@ -156,16 +250,13 @@ def make_report(port_list, prices_dict):
         '''
     return port_status
 
-pol = read_portfolio(portFile)
-prd = read_prices(priceFile)
-
-standing = make_report(pol,prd)
+pol = read_portfolio_2_4(portFile)
+prd = read_prices_2_6(priceFile)
+standing = make_report_2_12(pol,prd)
 
 # using list comprehension ( chap 2.6)
 xsum = sum([t[3] for t in standing])
 xsum
-
-
 nt1 =[]
 hdr = ['Name' ,    'Shares'  ,    'Price',     'Change']
 for tu in standing:

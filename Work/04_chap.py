@@ -50,7 +50,7 @@ import sys
 import os
 
 excdir = os.getcwd()
-excdir += r'\work\Excercise\4'
+excdir += r'\work'
 sys.path
 sys.path.append(excdir)
 

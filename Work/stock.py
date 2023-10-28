@@ -1,6 +1,6 @@
 '''
 Exercise 4.1: Objects as Data Structures
-Creating stock class
+Exercise 4.2: Adding some Methods
 '''
 
 class Stock:
