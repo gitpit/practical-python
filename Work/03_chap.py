@@ -127,7 +127,7 @@ Each module loads and executes only once. Note: Repeated imports just return a r
 '''
 import fileparse as fi
 import math as m
-#fi.parse_csv()
+fi.parse_csv()
 
 def rectangle(r,theta):
     x = r*m.cos(theta)
