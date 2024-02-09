@@ -51,6 +51,12 @@ def read_portfolio_2_5(fname):
     return dataList
 
 ## Exercise 4.4: reading portfolio.csv  and ret stock objects
+import sys
+excdir = os.getcwd()
+excdir += r'\work'
+sys.path
+sys.path.append(excdir)
+
 import stock
 def read_portfolio_4_4_x(fname):
     '''
@@ -86,7 +92,7 @@ def read_portfolio_4_4(fname):
     return sl
 
 
-## calling methods above
+## calling  above methods
 import os
 import csv
 
@@ -151,7 +157,7 @@ Tie all of this work together by adding a few additional statements to your repo
 These statements should take the list of stocks in Exercise 2.5 and the dictionary of prices in Exercise 2.6 and compute 
 the current value of the portfolio along with the gain/loss.
 '''
-def gain_loss(portfolioFile,pricesFile):
+def make_report_data(portfolioFile,pricesFile):
     '''
     ##Exercise 2.7: Finding out if you can retire
     return list: gain_loss
@@ -182,12 +188,12 @@ def gain_loss(portfolioFile,pricesFile):
 
 
 ## Excercise 4.4 gain_loss using stocks class
-def gain_loss_4_4(portfolioFile,pricesFile):
+def make_report_data_4_4(portfolioFile,pricesFile):
     '''
-    ##Exercise 2.7: Finding out if you can retire
+    ## Excercise 4.4 gain_loss using stocks class
     return list: gain_loss
     '''
-    pol = read_portfolio_4_4(portfolioFile)
+    pol = read_portfolio_4_4(portfolioFile) # gets stocks objects
     prd = read_prices_2_6(pricesFile)
     gain_loss = []
     for st in pol:
@@ -210,16 +216,17 @@ def gain_loss_4_4(portfolioFile,pricesFile):
         print(a)
     print(f'Total loss/gain = {tot:0.4f}')    
 
-gain_loss_4_4(portFile,priceFile)
+make_report_data_4_4(portFile,priceFile)   ## using stocks class
 
-gain_loss(portFile,priceFile)
+make_report_data(portFile,priceFile)
 
 
 ## Exercise 2.8: How to format numbers
 ##Exercise 2.11: Adding some headers
 ## Exercise 2.12: Formatting Challenge
-def make_report_2_12(port_list, prices_dict):
+def print_report_2_12(port_list, prices_dict):
     '''
+    ## print formatted report
     ## Exercise 2.8: How to format numbers
     ##Exercise 2.11: Adding some headers
     ## Exercise 2.12: Formatting Challenge
@@ -237,37 +244,52 @@ def make_report_2_12(port_list, prices_dict):
             #port_status.append(tuple(tu[0],tu[1],tu[1],val))
     ## print this in a formatted order
     hdr = ('Name' ,    'Shares'  ,    'Price',     'Change')
-    hdr = f'{hdr[0]:>10s}{hdr[1]:>10s}{hdr[2]:>10s}{hdr[3]:>10s}'
+    hdr2 = f'{hdr[0]:>10s}{hdr[1]:>10s}{hdr[2]:>10s}{hdr[3]:>10s}'
     #print(f'Name     Shares      Price     Change')
-    print(hdr)
-    print(f'---------- ---------- ---------- ----------')
+    print(hdr2)
+    print(('-'*10 + ' ')*len(hdr))
 
     for x in port_status:
-        print('%10s %10d $%0.2f, %10.2f' %(x))
+        print('%10s %10d $%10.2f %10.2f' %(x))
 
     '''for name,share,price,change in port_status:
         print(f'{name:10s} {share:10d}, {price:$>.2f}, {change:>10.2f}')
         '''
     return port_status
 
-pol = read_portfolio_2_4(portFile)
-prd = read_prices_2_6(priceFile)
-standing = make_report_2_12(pol,prd)
+#### 
+import tableformat
+def print_report_4_5(reportdata, formatter):
+    '''
+    '''
+    formatter.headings(['Name','Shares''Price','Change'])
+    for name, shares,price,change in reportdata:
+        rowdata = [name, str(shares), f'{price:0.2f}',f'{change:.2f}']
+        formatter.row(rowdata)
 
-# using list comprehension ( chap 2.6)
-xsum = sum([t[3] for t in standing])
-xsum
-nt1 =[]
-hdr = ['Name' ,    'Shares'  ,    'Price',     'Change']
-for tu in standing:
-    nt1.append(list(zip(hdr,tu)))
-nt1
 
-for s in nt1:
-    print(s)
+def portfolio_report_2(portFile, priceFile):
+    '''
+    chap2-Make a stock report given portfolio and price data files.
+    '''
+    pol = read_portfolio_2_4(portFile)
+    prd = read_prices_2_6(priceFile)
+    print_report_2_12(pol,prd)
 
-xsum2 = [print(s[1][1]) for s in nt1]
-xsum2
+def portfolio_report_4_5(portFile,priceFile):
+    '''
+    chap4-Make a stock report given portfolio and price data files.
+    '''
+    pol = read_portfolio_4_4(portFile)
+    prd = read_prices_2_6(priceFile)
+    report = print_report_4_5(pol,prd)
+    formatter = tableformat.TableFormatter()
+    print_report_4_5(report,formatter)
 
-xval2 = {print(s[0]) for s in nt1}
-xval2
+portfolio_report_2(portFile,priceFile)
+portfolio_report_4_5(portFile,priceFile)
+
+
+
+
+

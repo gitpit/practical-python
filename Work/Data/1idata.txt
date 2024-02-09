@@ -1,7 +1,7 @@
 #header for the test file
-    void setString(std::string_view name, const String & value);
-    String getString(std::string_view name) const;
-    bool isChanged(std::string_view name) const;
-    SettingsChanges changes() const;
-    void applyChange(const SettingChange & change);
+with open(datadir+r'\1idata.txt','rt') as ifs, open(datadir+r'\1odata.txt','w+') as ofs:
+    for line in ifs:
+        print(line)
+        next(ifs)
+        ofs.write(line)
 # End header for the test file

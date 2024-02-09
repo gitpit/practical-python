@@ -9,14 +9,15 @@ class Player:
         self.x = x
         self.y = y
         self.health = 100
-
+    '''
     def __init__(self):             # check about default constructor
         self.x =0
         self.y=0
+    ''' 
     def move(self, dx, dy):         # self is the instance or similar to this pointer in c++
         self.x += dx
         self.y += dy
-
+  
     def damage(self, pts):
         self.health -= pts
 
@@ -59,6 +60,25 @@ from stock import Stock
 a = Stock('goo',11,22.22)
 b = Stock('uuu',66,77.23)
 
+#-------------------------------------------
+# importing Tlogs module and printing....
+import Work.meslog as meslog
+dataDir = os.getcwd()
+dataDir += r'\work\Data\meslogs.txt'
+mylogs = meslog.ReadMesLogs(dataDir)
+
+
+for log in mylogs:
+    #print(log.Id)
+    #str(log)
+    for sec in log.sections:
+        #print(sec.z,sec.x,sec.y,sec.d)
+        print(str(sec))
+    print('---------------')
+
+
+#----------------------------------
+    
 stc = [a,b]
 stc
 for s in stc:
@@ -101,28 +121,94 @@ print(sumval)
 #Exercise 4.4: Using your class
 # inside report.py
 
-''' 4.2 inheritance
-class Parent:
+
+
+'''                            
+            ########### 4.2 inheritance
+    class Parent:
+
+
+    class Child(Parent):
+    >>> with Inheritance
+        Extending :  With inheritance, you are taking an existing class and:
+            Adding new methods
+            Redefining some of the existing methods
+            Adding new attributes to instances  
+
+    >>> method overriding can be done
+        using "super" to call the base class method
+
+    class Stock:
+        ...
+        def cost(self):
+            return self.shares * self.price
+        ...
+    class MyStock(Stock):
+        def cost(self):
+            # Check the call to `super`
+            actual_cost = super().cost()        ## using super ...
+            return 1.25 * actual_cost
+
+    >>> if __init__ is redifined in derived class, it is essential to initialize parent
+        call the __init__() method on the super which is the way to call the base version as shown previously.
+    >>> object as base class - if a class has no parent, object can be used as a base class. "object" is the parent of all objects in Python
+    >>> Multiple inheritance
+    class Mother:
     ...
-
-class Child(Parent):
->>> method overriding can be done
-    using "super" to call the base class method
-
-class Stock:
+    class Father:
     ...
-    def cost(self):
-        return self.shares * self.price
-    ...
-
-class MyStock(Stock):
-    def cost(self):
-        # Check the call to `super`
-        actual_cost = super().cost()        ## using super ...
-        return 1.25 * actual_cost
-
->>> if __init__ is redifined in derived class, it is essential to initialize parent
-    call the __init__() method on the super which is the way to call the previous version as shown previously.
+    class child (Mother, Father):
+'''
 
 '''
+Exercise 4.5: An Extensibility Problem
+source file tableformat.py
+abstract class; only declaration for extensibility
+Exercise 4.7: Polymorphism in Action
+
+''' 
+
+from stock import Stock,MyStock
+
+ms = MyStock(20,120,2)
+print(ms.cost())
+
+s2 = ms.cost
+s2
+s2()
+
+'''
+    4.3 Special Methods
+    -------------------
+    Classes may define special methods which are treated special way by the python interpreter.
+    Special methods are always preceded by __; eg: __init(self):
+'''
+from datetime import date
+d = date(2024,11,12)
+print(d)
+
+str("str")
+str(d)
+repr(d) # __repr__
+
+#todo:: try using special function str and __len__; __getitem__()
+
+# lookup and bound methods
+lg1 = meslog.TSec(2,3,4,5)
+lg1
+lg1()
+
+## Attribute Access
+'''
+property getter and setter
+'''
+
+        ###### 4.4 Defining Exceptions
+
+class NetworkError(Exception):
+    pass
+
+class AuthenticationError(NetworkError):
+    pass
+
 
