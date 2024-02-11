@@ -8,6 +8,9 @@ class TSec:
         self.x =x
         self.y=y
         self.d =d  #dia
+    #special methods
+    def __str__(self):
+        return f'{self.z} {self.x}  {self.y}  {self.d} '
 
 class TLog:
     def __init__(self,id,seg,sz,xs):
@@ -15,6 +18,9 @@ class TLog:
         self.segNum=seg
         self.size=sz
         self.sections=xs
+    #using special method __str__
+    def __str__(self):
+        return f'{self.Id}\t{self.segNum}\t{self.size}\t\n'
 
 def ReadMesLogs(mesfile):
     '''

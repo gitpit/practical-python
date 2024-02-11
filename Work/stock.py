@@ -15,3 +15,11 @@ class Stock:
     def buy(self,quantity,price):        
         self.price = (quantity*price + self.shares*self.price)/(quantity+self.shares)
         self.shares +=quantity
+
+# using inheritance
+class MyStock (Stock):
+    def __init__(self,name,shares,price,factor):
+        super().__init__(name,shares,price)
+        self.factor = factor
+    def cost(self):
+        return self.factor* super().cost()

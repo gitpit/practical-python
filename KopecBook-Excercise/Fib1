@@ -1,0 +1,18 @@
+## quick fib seriese printing for n numbers
+def fib1(n):
+    a =1
+    b=2
+    sum=0
+    i=1
+    if n <=2:
+        print(a, b)
+    else:
+        print(a, b)
+        while i < n-2:
+            sum = a +b
+            a =b
+            b = sum
+            print(sum)
+            i = i+ 1
+
+fib1(2)
