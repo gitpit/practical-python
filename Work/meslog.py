@@ -32,11 +32,8 @@ def ReadMesLogs(mesfile):
         for line in f:
             #hdr = f.readline()
             strs = line.split()            
-            if len(strs) >=4 and strs[0] != '.' and strs[1] != '.' and strs[2] != '.' and strs[3] != '.':
-                id = strs[0]
-                seg =int(strs[1])
-                nsec =int(strs[2])
-                wgt = float(strs[3])
+            if len(strs) >=4 and strs[0] != '.' and strs[1] != '.' and strs[2] != '.' and strs[3] != '.':                
+                id,seg,nsec,wgt = strs[0],int(strs[1]),int(strs[2]),float(strs[3])
             i=0
             secs = []
             while i < nsec:     # read all section for the log
