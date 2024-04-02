@@ -84,17 +84,37 @@ def read_portfolio_4_4(fname):
     return stock object - using for loop enumerator
     '''    
     try:        
-        with open(fname, 'rt') as f:
+        with open(fname, 'rt+') as f:
             hdr = f.readline()  #ignore hdr
             sl = [stock.Stock(s.split(',')[0], int(s.split(',')[1]), float(s.split(',')[2])) for s in f]            
     except FileExistsError:
         print('fiile not found')
     return sl
 
+## Exercise 6.2: Supporting Iteration
+
+import sys
+import os
+import fileparse
+from stock import Stock
+from portfolio import Portfolio  
+excdir = os.getcwd()
+excdir += r'\work'
+sys.path
+sys.path.append(excdir)
+
+def read_portfolio_6_2(filename):
+    '''
+    '''
+    portdicts = fileparse.parse_csv2(filename, ['name','shares', 'price'])        
+    portfolio = [ Stock(d['name'],d['shares'],d['price']) for d in portdicts]
+    return Portfolio(portfolio)
+
 
 ## calling  above methods
 import os
 import csv
+import fileparse
 
 workDir = os.getcwd()
 portFile = workDir + r'\work\data\portfolio.csv'
@@ -103,6 +123,8 @@ mylist1 = read_portfolio_2_4(portFile)
 mylist2 = read_portfolio_2_5(portFile)
 mystocks = read_portfolio_4_4_x(portFile)
 mystocks = read_portfolio_4_4(portFile)
+mystocksX = read_portfolio_6_2(portFile)
+
 print(mylist1)
 print("-------------------------------")
 print(mylist2)

@@ -72,7 +72,6 @@ for r in recs2:
 '''
 # prog.py
 # Import statements (libraries)
-import modules
 
 # Functions
 def spam():
