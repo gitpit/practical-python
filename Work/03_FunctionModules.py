@@ -1,6 +1,12 @@
 '''
 # Chapter 3: Program Organization - practice
 # Dated:2023/10/06
+3.1 Functions and Script Writing
+3.2 More Detail on Functions
+3.3 Exception Handling
+3.4 Modules
+3.5 Main module
+3.6 Design Discussion about Embracing Flexibility
 '''
 
 '''

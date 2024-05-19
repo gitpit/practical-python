@@ -1,5 +1,9 @@
 '''
-                    6. Generators
+6. Generators
+6.1 Iteration Protocol
+6.2 Customizing Iteration with Generators
+6.3 Producer/Consumer Problems and Workflows
+6.4 Generator Expressions
 '''
 ## 6.1 Iteration Protocol
 
@@ -47,7 +51,7 @@ y = countdown(5)
 for i in y:
     print(i)
 
-# Exercise 6.4: A Simple Generator
+# Exercise 6.4: A Simple Generator  filematch check
 
 def quickLines(filename):
     print(filename)
@@ -60,15 +64,54 @@ def filematch(filename,substr):
         for line in f:
             if substr in line:
                 yield line
+
+
 import os
 import pathlib
 
 workdir = os.getcwd()
-workdir = workdir + r'\work\data'
-quickLines(workdir+r'\portfolio.csv')
+datadir = workdir + r'\work\data'
+quickLines(datadir+r'\portfolio.csv')
 
 print('\n ----\n')
 
 
-for x in filematch(workdir+r'\portfolio.csv','IBM'):
+for x in filematch(datadir+r'\portfolio.csv','IBM'):
     print(x)
+
+########
+#######     6.3 Producers, Consumers and Pipelines
+######## producer → processing → processing → consumer
+
+## Generator Pipelines
+
+## Exercise 6.8: Setting up a simple pipeline
+## producer → processing → processing → consumer
+def filematch(lines,substr):
+    for line in lines:
+        if substr in line:
+            yield line
+                
+
+from follow import follow
+import os
+import time
+
+datadir = os.getcwd() + r'\work\data'
+stocklogFile = datadir + r'\stocklog.csv'
+lines = follow(stocklogFile)    #processing
+
+ibm = filematch(lines,'IBM')    #processing
+
+for line in ibm:        #consumer
+    print(line)
+
+
+##Exercise 6.9: Setting up a more complex pipeline
+from follow import follow
+import csv
+
+lines = follow(stocklogFile)
+
+for row in csv.reader(lines):
+    print(row)

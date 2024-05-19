@@ -52,6 +52,7 @@ def read_portfolio_2_5(fname):
 
 ## Exercise 4.4: reading portfolio.csv  and ret stock objects
 import sys
+import os
 excdir = os.getcwd()
 excdir += r'\work'
 sys.path

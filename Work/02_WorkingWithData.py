@@ -1,6 +1,14 @@
 '''
 # Chap 2: Working with Data
 https://dabeaz-course.github.io/practical-python/Notes/02_Working_with_data/00_Overview.html
+2.1 Datatypes and Data Structures
+2.2 Containers
+2.3 Formatted Output
+2.4 Sequences
+2.5 Collections module
+2.6 List comprehensions
+2.7 Object model
+
 '''
         ##### 2.1 Datatypes and Data structures
         #####

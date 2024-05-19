@@ -1,6 +1,9 @@
 '''
 # 4.0 Class & Object
-
+4.1 Introducing Classes
+4.2 Inheritance
+4.3 Special Methods
+4.4 Defining new Exception
 '''
 # class statement
 # The object is always passed as the first argument. It is merely Python programming style to call this argument self
