@@ -126,4 +126,36 @@ while( q1.qsize() !=0):
     print(q1.get())
 
 
-st = stack_data.s
+##
+excdir = os.getcwd()
+excdir += r'\work'
+sys.path
+sys.path.append(excdir)
+
+from stock import Stock
+
+slist = []
+slist.append(Stock('DAA',22,1111))
+slist.append(Stock('CAB',122,1211))
+slist.append(Stock('CC',222,5353))
+slist.append(Stock('AC',222,5353))
+for s in slist:
+    print(s.name)
+
+## sorting using lambda function
+slist.sort(key=lambda a:a.name)
+for s in slist:
+    print(s.name)
+
+## dict + lambda function
+
+mdict =[{'name': 'AA', 'price': 32.2, 'shares': 100},
+    {'name': 'IBM', 'price': 91.1, 'shares': 50},
+    {'name': 'CAT', 'price': 83.44, 'shares': 150},
+    {'name': 'MSFT', 'price': 51.23, 'shares': 200},
+    {'name': 'GE', 'price': 40.37, 'shares': 95},
+    {'name': 'MSFT', 'price': 65.1, 'shares': 50},
+    {'name': 'IBM', 'price': 70.44, 'shares': 100}]
+
+mdict.sort(key=lambda a:a['name'])
+mdict

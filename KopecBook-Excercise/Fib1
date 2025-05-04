@@ -1,9 +1,14 @@
 ## quick fib seriese printing for n numbers
+
+print("Fibonacci series")
 def fib1(n):
     a =1
     b=2
     sum=0
     i=1
+    ouput = []
+    ouput.append(a)
+    ouput.append(b) 
     if n <=2:
         print(a, b)
     else:
@@ -12,7 +17,29 @@ def fib1(n):
             sum = a +b
             a =b
             b = sum
-            print(sum)
+            #print(sum)
+            ouput.append(sum)
             i = i+ 1
+    return ouput
+print(fib1(8))
 
-fib1(2)
+#recursion fib numbers not sum...
+def fib2(n, a=1,b=2,output=[]):
+    if n <= 0:
+        return output
+    else:
+        output.append(a)
+        return fib2(n-1, b, a+b, output)
+print("Fibonacci series recrusion"-2)
+print(fib2(8))
+
+# fib3 is a generator function to yield the fibonacci numbers one by one
+def fib3(n):
+    a, b = 1, 2
+    for _ in range(n):
+        yield a
+        a, b = b, a + b
+print("Fibonacci series generator fib3")
+fib3_gen = fib3(8)
+for num in fib3_gen:
+    print(num, end=' ')

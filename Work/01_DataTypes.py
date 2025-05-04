@@ -3,7 +3,8 @@
 #https://dabeaz-course.github.io/practical-python/Notes/01_Introduction/04_Strings.html
 '''
  #Python: It’s All About the Indentation
- indentation is used to define compound statements or blocks. In a Python program, contiguous statements that are indented to the same level are considered to be part of the same block.
+ indentation is used to define compound statements or blocks. In a Python program, contiguous statements that are indented to the same level are considered to be part of the 
+ same block.
  https://realpython.com/python-conditional-statements/#python-its-all-about-the-indentation
 
  if <expr> :
@@ -206,7 +207,7 @@ tshare ='xyx corp'
 price=999.903
 sym = 'xy'
 f'{tshare} with range{sym} amount {price:0.2f}'
-
+print("hello" f'{tshare}')
 ## Exercise 1.18: Regular Expressions
 '''
 use pythong re module for regular expressions
@@ -242,6 +243,7 @@ miscNames = ['jack', 'jill']
 names = names + miscNames
 names[4] = 'Mills'
 len(names)
+names.remove('tom')
 'jack' in names     # using in operator
 'bob' not in names  # using not in operator
 # replication; 
@@ -254,25 +256,25 @@ for name in names:
 # removing from list using remove('item') or del names[1]
 # Lists can be sorted “in-place”.
 names.sort()
+
 #Use sorted() if you’d like to make a new list instead:
 t = sorted(names)
 
-## taking list of string and join them into a string
+## taking list of string and join them into a string, with seperatation char
 ts = ','.join(names)
 ts
 type(ts)
 type(names)
+tx1 = ' '.join(names)
 tp1 = list(ts.split(','))
 ## list of list and 
 tx = ['test1',names,it]
-
-for item in tx:
-    print(item)
+tx[1][2]
 
 '''######### 1.6 File Management   ##########
 open file should be closed
 '''
-## Open a file and read data and write to bar.txt
+## ##1>> Open a file and read data and write to bar.txt
 import os
 import pathlib
 tp = os.getcwd()
@@ -280,7 +282,13 @@ tp = os.getcwd()
 f = open( tp+r"\Work\Data\foo.txt",'rt')
 g = open(tp+r'\work\data\bar.txt', 'w+')
 
-data = f.read()
+data = f.read()  #read everything into list
+type(data)
+print(data)
+xdata = data.split()
+type(xdata)
+print(xdata)
+print(';'.join(xdata))
 g.write(data)
 g.write('------------end -----------')
 g.seek(0)
@@ -289,15 +297,15 @@ print(line)
 while line:
     print(line)
     line = g.readline()
-
 f.close()
 g.close()
 
-## another way read a line and write a line
+## ##2>> another way read a line and write a line
 f = open( tp+r"\Work\Data\foo.txt",'rt')
 g = open(tp+r'\work\data\bar.txt', 'w+')
 
 for dat in f:
+    print(dat)
     g.write(dat)
 g.write('------------end2 -----------') 
 g.seek(0) 
@@ -306,7 +314,7 @@ for d in g:
 f.close()
 g.close()
 
-##  another way to open and close file without using close() method
+##  ##3>> another way to open and close file without using close() method
 ## like C++ idiom --
 with open( tp+r"\Work\Data\foo.txt",'rt') as f, open(tp+r'\work\data\bar.txt', 'w+') as g:
     for line in f:

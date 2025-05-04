@@ -55,7 +55,7 @@ with open(fpath,'rt') as f:
     print(hdr)
     r = next(rows)
     print(r)
-    (a,b,c)  = next(rows)
+    (a,b,c)  = next(rows)    
     print(a,b,c)
     for row in rows:
         (a,b,c) = row
@@ -139,8 +139,9 @@ c       Character (from integer)
 '''
 name = 'ibm'
 shares = 100
-price =91.11
-f'{name:>10s}{shares:>10d} {price:>10.2f}'
+price =91.11777
+xf1 = f'{name:>10s}{shares:>10d} {price:>10.2f}'
+print(xf1)
 
 s = {       #dict
     'name': 'IBM',
@@ -186,14 +187,15 @@ for n in range(10,0,-1):       # Count 10 ... 1
 for i in range(0,10,1):       # Count 10 ... 1
         print(i, end=' ')
 
-### enumerating over sequence
+### enumerating over sequence --> enumerates into tuple
 names = ['aa','bx','dfds','zee']
 for i,val in enumerate(names):
     print(i,val)
 
 for i in enumerate(names):
     print(i)
-    type(i)
+    print(type(i))
+    #type(i)
     lst=list(i)
     print(lst, type(lst))
     tu = tuple(i)
