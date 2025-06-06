@@ -155,6 +155,7 @@ for x in reversed(name):
     name1 +=x
 print(name1)
 
+
 ## byte string, unicode etc.
 bstr = b'hello'
 len(bstr)

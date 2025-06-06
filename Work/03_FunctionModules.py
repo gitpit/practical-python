@@ -128,8 +128,7 @@ Specifically, import always executes the entire file and modules are still isola
 
 The import module as statement is only changing the name locally. The from math import cos, sin statement still loads 
 the entire math module behind the scenes. It’s merely copying the cos and sin names from the module into the local space 
-after it’s done.
-Each module loads and executes only once. Note: Repeated imports just return a reference to the previously loaded module.
+after it’s done. Each module loads and executes only once. Note: Repeated imports just return a reference to the previously loaded module.
 '''
 import fileparse as fi
 import math as m
@@ -149,3 +148,4 @@ from math import sin,cos
 import sys
 sys.path
 #sys.path.append(workdir)
+sys.modules.keys
