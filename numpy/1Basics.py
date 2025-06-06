@@ -2,6 +2,7 @@
 import numpy as np
 # Create a 1D array
 arr = np.array([1,2,3,4,5])
+np.
 print("1D Array:", arr)
 # Create a 2D array
 arr2d = np.array([[1, 2, 3], [4, 5, 6]])
@@ -37,4 +38,3 @@ print("First row of arr2d:", matrix)
 #slicing matrix
 sub_matrix= matrix[1:,1:3]
 print("Sub-matrix (from 2nd row and 2nd to 3rd column):\n", sub_matrix)
-# Inde
